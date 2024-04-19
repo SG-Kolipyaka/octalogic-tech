@@ -11,22 +11,29 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useContext } from 'react';
+import { AuthContext } from '../Context/AuthContextProvider';
 
 interface VehicleTypeProps {
-  wheels: number; // Number of wheels (2 or 4)
-  onNext: (vehicleType: string) => void;
+  wheels: number; 
 }
 
 const defaultTheme = createTheme();
 
-const VehicleType: React.FC<VehicleTypeProps> = ({ wheels, onNext }) => {
+const VehicleType: React.FC<VehicleTypeProps> = ({ wheels}) => {
+  const {
+    setModels,
+    setVehicles,
+    objVehical
+  } = useContext(AuthContext);
   const [selectedValue, setSelectedValue] = React.useState<string>('');
 
-  // Simulated database-driven vehicle options
   const vehicleOptions = wheels === 2 ? ['Motorcycle', 'Scooter'] : ['Car', 'Truck'];
 
   const handleNext = () => {
-    onNext(selectedValue);
+    objVehical(selectedValue)
+    setVehicles(false)
+    setModels(true)
   };
 
   const isFormValid = selectedValue !== '';

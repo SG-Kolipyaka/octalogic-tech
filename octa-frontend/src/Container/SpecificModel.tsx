@@ -11,18 +11,23 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-interface SpecificModelProps {
-  onNext: (selectedModel: string) => void;
-}
+import { useContext } from 'react';
+import { AuthContext } from '../Context/AuthContextProvider';
 
 const defaultTheme = createTheme();
 
-const SpecificModel: React.FC<SpecificModelProps> = ({ onNext }) => {
+const SpecificModel: React.FC = () => {
+  const {
+    setModels,
+    setDates,
+    objModel,
+  } = useContext(AuthContext);
   const [selectedValue, setSelectedValue] = React.useState<string>('');
 
   const handleNext = () => {
-    onNext(selectedValue);
+    objModel(selectedValue)
+    setModels(false)
+    setDates(true)
   };
 
   const isFormValid = selectedValue !== '';

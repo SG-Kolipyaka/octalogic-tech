@@ -8,19 +8,28 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useContext } from 'react';
+import { AuthContext } from '../Context/AuthContextProvider';
 
-interface NameFormProps {
-  onNext: (data: { firstName: string; lastName: string }) => void;
-}
+// interface NameFormProps {
+//   onNext: (data: { firstName: string; lastName: string }) => void;
+// }
 
 const defaultTheme = createTheme();
 
-const NameForm: React.FC<NameFormProps> = ({ onNext }) => {
+const NameForm: React.FC = () => {
+  const {
+    setWheels,
+    setNames,
+    objName
+  } = useContext(AuthContext);
   const [firstName, setFirstName] = React.useState('');
   const [lastName, setLastName] = React.useState('');
 
   const handleNext = () => {
-    onNext({ firstName, lastName });
+    objName(firstName,lastName)
+    setWheels(true)
+    setNames(false)
   };
 
   const isFormValid = firstName.trim() !== '' && lastName.trim() !== '';

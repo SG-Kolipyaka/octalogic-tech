@@ -1,42 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './App.css';
 import NameForm from './Container/NameForm';
 import NumberWheels from './Container/NumberWeels';
 import VehicleType from './Container/VehicleType';
 import SpecificModel from './Container/SpecificModel';
+import BookingDates from './Container/BookingDates';
+import { AuthContext } from './Context/AuthContextProvider';
+
 
 function App() {
-  const handleNameSubmit = (nameData: { firstName: string; lastName: string }) => {
-    console.log('Received name data:', nameData);
-  };
+  const {
+    name,
+    wheel,
+    model,
+    vehicle,
+    date,
+  } = useContext(AuthContext);
 
-  const handleWheelsSubmit = (wheels: number) => {
-    console.log('Received number of wheels:', wheels);
-  };
-
-  const handleVehicleTypeSubmit = (vehicleType: string) => {
-    console.log('Received vehicle type:', vehicleType);
-
-  };
-
-  const handleModelSubmit = (selectedModel: string) => {
-    console.log('Received selected model:', selectedModel);
-
-  };
 
   return (
     <div className="App">
-
-        <NameForm onNext={handleNameSubmit} />
-
-
-        <NumberWheels onNext={handleWheelsSubmit} />
-
-
-        <VehicleType wheels={4} onNext={handleVehicleTypeSubmit} />
-
-        <SpecificModel onNext={handleModelSubmit} />
-      {/* </header> */}
+      {name && <NameForm/>}
+      {wheel && <NumberWheels/>}
+      {vehicle && <VehicleType wheels={4}/>}
+      {model && <SpecificModel/>}
+      {date && <BookingDates/>}
     </div>
   );
 }
