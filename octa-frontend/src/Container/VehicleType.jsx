@@ -13,24 +13,42 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useContext } from 'react';
 import { AuthContext } from '../Context/AuthContextProvider';
+import { useEffect,useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getvehicleData } from '../Redux/VehicleReducer/action';
+
 
 const defaultTheme = createTheme();
 
-const SpecificModel: React.FC = () => {
+
+const VehicleType = () => {
+  const dispatch=useDispatch()
+const {vehicles}=useSelector((store)=>store.vehiclereducer)
   const {
     setModels,
-    setDates,
-    objModel,
+    setVehicles,
+    objVehical,
+    data
   } = useContext(AuthContext);
-  const [selectedValue, setSelectedValue] = React.useState<string>('');
+  const [selectedValue, setSelectedValue] = useState('');
+
 
   const handleNext = () => {
-    objModel(selectedValue)
-    setModels(false)
-    setDates(true)
+    objVehical(selectedValue)
+    setVehicles(false)
+    setModels(true)
   };
 
+  let obj={
+    params:{
+      wheels:data.wheels
+    }
+  }
   const isFormValid = selectedValue !== '';
+
+  useEffect(()=>{
+    dispatch(getvehicleData(obj))
+  },[data])
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -43,27 +61,31 @@ const SpecificModel: React.FC = () => {
             flexDirection: 'column',
             alignItems: 'center',
             backgroundColor: '#f5f5f5', 
-            padding: 3,
+            padding: 3, 
             borderRadius: 8, 
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
           </Avatar>
           <Typography component="h1" variant="h5">
-            Select the Model
+            Type of Vehicle
           </Typography>
           <FormControl component="fieldset" sx={{ mt: 3 }}>
-            <FormLabel component="legend">Choose a Model</FormLabel>
+            <FormLabel component="legend">Select Type of Vehicle</FormLabel>
             <RadioGroup
-              aria-label="model"
-              name="model"
+              aria-label="vehicleType"
+              name="vehicleType"
               value={selectedValue}
               onChange={(e) => setSelectedValue(e.target.value)}
             >
-              <FormControlLabel value="Model A" control={<Radio />} label="Model A" />
-              <FormControlLabel value="Model B" control={<Radio />} label="Model B" />
-              <FormControlLabel value="Model C" control={<Radio />} label="Model C" />
-              <FormControlLabel value="Model D" control={<Radio />} label="Model D" />
+              {vehicles.map((option, index) => (
+                <FormControlLabel
+                  key={index} 
+                  value={option}
+                  control={<Radio />}
+                  label={option}
+                />
+              ))}
             </RadioGroup>
           </FormControl>
           <Button
@@ -79,8 +101,8 @@ const SpecificModel: React.FC = () => {
           </Button>
         </Box>
       </Container>
-    </ThemeProvider>
+    </ThemeProvider>   
   );
 };
 
-export default SpecificModel;
+export default VehicleType;

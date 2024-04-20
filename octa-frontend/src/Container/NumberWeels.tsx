@@ -11,12 +11,9 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useContext } from 'react';
+import { useContext,useState } from 'react';
 import { AuthContext } from '../Context/AuthContextProvider';
 
-// interface NumberWheelsProps {
-//   onNext: (wheels: number) => void;
-// }
 
 const defaultTheme = createTheme();
 
@@ -26,7 +23,7 @@ const NumberWheels: React.FC = () => {
     setVehicles,
     objWheel
   } = useContext(AuthContext);
-  const [selectedValue, setSelectedValue] = React.useState<string>(''); // 'two' or 'four'
+  const [selectedValue, setSelectedValue] = useState<string>(''); 
 
   const handleNext = () => {
     const wheels = selectedValue === 'two' ? 2 : 4;
@@ -55,7 +52,7 @@ const NumberWheels: React.FC = () => {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
           </Avatar>
           <Typography component="h1" variant="h5">
-            Number of Wheels ?
+            Number of Wheels 
           </Typography>
           <FormControl component="fieldset" sx={{ mt: 3 }}>
             <FormLabel component="legend">Select Number of Wheels</FormLabel>

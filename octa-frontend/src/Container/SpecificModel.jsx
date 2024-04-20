@@ -11,32 +11,49 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useContext } from 'react';
+import { useContext,useState,useEffect } from 'react';
 import { AuthContext } from '../Context/AuthContextProvider';
+import { useDispatch, useSelector } from 'react-redux';
+import { getvehicleData } from '../Redux/VehicleReducer/action';
 
-interface VehicleTypeProps {
-  wheels: number; 
-}
 
 const defaultTheme = createTheme();
 
-const VehicleType: React.FC<VehicleTypeProps> = ({ wheels}) => {
+const SpecificModel = () => {
+  const dispatch=useDispatch()
+  const {vehicledata}=useSelector((store)=>store.vehiclereducer)
   const {
     setModels,
-    setVehicles,
-    objVehical
+    setDates,
+    objModel,
+    data
   } = useContext(AuthContext);
-  const [selectedValue, setSelectedValue] = React.useState<string>('');
+  const [selectedValue, setSelectedValue] = useState('');
 
-  const vehicleOptions = wheels === 2 ? ['Motorcycle', 'Scooter'] : ['Car', 'Truck'];
+
+
 
   const handleNext = () => {
-    objVehical(selectedValue)
-    setVehicles(false)
-    setModels(true)
+    const selectedModel = vehicledata.find((el) => el.model === selectedValue);
+    if (selectedModel) {
+      const { id, model } = selectedModel; 
+      objModel( model,id ); 
+      setModels(false);
+      setDates(true);
+    }
   };
+  let obj={
+    params:{
+      wheels:data.wheels,
+      type:data.vehicleType
+    }
+  }
 
   const isFormValid = selectedValue !== '';
+
+  useEffect(()=>{
+    dispatch(getvehicleData(obj))
+  },[data,selectedValue])
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -49,31 +66,28 @@ const VehicleType: React.FC<VehicleTypeProps> = ({ wheels}) => {
             flexDirection: 'column',
             alignItems: 'center',
             backgroundColor: '#f5f5f5', 
-            padding: 3, 
+            padding: 3,
             borderRadius: 8, 
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
           </Avatar>
           <Typography component="h1" variant="h5">
-            Type of Vehicle
+            Select the Model
           </Typography>
           <FormControl component="fieldset" sx={{ mt: 3 }}>
-            <FormLabel component="legend">Select Type of Vehicle</FormLabel>
+            <FormLabel component="legend">Choose the available model for booking</FormLabel>
             <RadioGroup
-              aria-label="vehicleType"
-              name="vehicleType"
+              aria-label="model"
+              name="model"
               value={selectedValue}
               onChange={(e) => setSelectedValue(e.target.value)}
             >
-              {vehicleOptions.map((option, index) => (
-                <FormControlLabel
-                  key={index}
-                  value={option}
-                  control={<Radio />}
-                  label={option}
-                />
-              ))}
+              {vehicledata.map((el)=>{
+                if(el.status!=="booked"){
+                  return <FormControlLabel key={el.id} value={el.model} control={<Radio />} label={el.model}/>
+                }
+              })}
             </RadioGroup>
           </FormControl>
           <Button
@@ -89,8 +103,8 @@ const VehicleType: React.FC<VehicleTypeProps> = ({ wheels}) => {
           </Button>
         </Box>
       </Container>
-    </ThemeProvider>   
+    </ThemeProvider>
   );
 };
 
-export default VehicleType;
+export default SpecificModel;

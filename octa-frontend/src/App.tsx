@@ -6,7 +6,7 @@ import VehicleType from './Container/VehicleType';
 import SpecificModel from './Container/SpecificModel';
 import BookingDates from './Container/BookingDates';
 import { AuthContext } from './Context/AuthContextProvider';
-
+ 
 
 function App() {
   const {
@@ -22,7 +22,7 @@ function App() {
     <div className="App">
       {name && <NameForm/>}
       {wheel && <NumberWheels/>}
-      {vehicle && <VehicleType wheels={4}/>}
+      {vehicle && <VehicleType/>}
       {model && <SpecificModel/>}
       {date && <BookingDates/>}
     </div>

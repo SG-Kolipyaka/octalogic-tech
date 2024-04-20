@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useContext} from 'react';
+import { useContext,useState} from 'react';
 import { AuthContext } from '../Context/AuthContextProvider';
 
 
@@ -13,8 +13,8 @@ const defaultTheme = createTheme();
 
 const BookingDates: React.FC = () => {
   const { setDates,data ,objDate} = useContext(AuthContext);
-  const [startDate, setStartDate] = React.useState<string>('');
-  const [endDate, setEndDate] = React.useState<string>('');
+  const [startDate, setStartDate] = useState<string>('');
+  const [endDate, setEndDate] = useState<string>('');
 
   const handleFormSubmit = () => {
     if (startDate && endDate) {

@@ -7,13 +7,11 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import FormLabel from '@mui/material/FormLabel';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useContext } from 'react';
+import { useContext,useState } from 'react';
 import { AuthContext } from '../Context/AuthContextProvider';
 
-// interface NameFormProps {
-//   onNext: (data: { firstName: string; lastName: string }) => void;
-// }
 
 const defaultTheme = createTheme();
 
@@ -23,8 +21,8 @@ const NameForm: React.FC = () => {
     setNames,
     objName
   } = useContext(AuthContext);
-  const [firstName, setFirstName] = React.useState('');
-  const [lastName, setLastName] = React.useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
   const handleNext = () => {
     objName(firstName,lastName)
@@ -52,9 +50,9 @@ const NameForm: React.FC = () => {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
           </Avatar>
           <Typography component="h1" variant="h5" color={"black"}>
-            What is Your Name ?
+            Please Enter Your Name
           </Typography>
-          
+          <FormLabel component="legend">Enter the Name for Booking Vehical</FormLabel>
           <Box component="form" noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>

@@ -1,4 +1,6 @@
 import { createContext, useState ,useEffect} from "react"
+import { useDispatch, useSelector } from 'react-redux';
+import { userpost,vehcilepatch } from "../Redux/VehicleReducer/action";
 const obj={
     firstName:"",
     lastName:"",
@@ -6,18 +8,22 @@ const obj={
     vehicleType:"",
     selectedModel:"",
     startDate:"",
-    endDate:""
+    endDate:"",
+    bookingID:0
   }
 
 export const AuthContext = createContext()
 
 const AuthContextProvider = ({ children }) => {
+  const dispatch=useDispatch()
+  const {success}=useSelector((store)=>store.vehiclereducer)
     const [data,setData]=useState(obj)
     const [name, setName] = useState(true)
     const [wheel, setWheel] = useState(false)
     const [vehicle, setVehicle] = useState(false)
     const [model, setModel] = useState(false)
     const [date, setDate] = useState(false)
+    const [id,setId]=useState(0)
 
     const objName=(firstName,lastName)=>{
         setData(prevData => ({
@@ -41,10 +47,12 @@ const AuthContextProvider = ({ children }) => {
           }));
     }
 
-    const objModel=(model)=>{
+    const objModel=(model,bookingID)=>{
+      setId(bookingID)
         setData(prevData => ({
             ...prevData,
-            selectedModel:model
+            selectedModel:model,
+            bookingID:bookingID
           }));
     }
     const objDate=(startDate,endDate)=>{
@@ -78,12 +86,13 @@ const AuthContextProvider = ({ children }) => {
 
     
 
+
     useEffect(()=>{
         const allFieldsFilled = Object.values(data).every((value) => !!value);
         if (allFieldsFilled) {
-          console.log(data);
-          setData(obj)
-          console.log(data)
+            dispatch(userpost(data))
+            dispatch(vehcilepatch({status:"booked"},id))
+            setData(obj); 
         }
     },[data])
 
