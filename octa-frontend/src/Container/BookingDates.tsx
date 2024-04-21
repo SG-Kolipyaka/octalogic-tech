@@ -5,14 +5,13 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useContext,useState} from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../Context/AuthContextProvider';
-
 
 const defaultTheme = createTheme();
 
 const BookingDates: React.FC = () => {
-  const { setDates,data ,objDate} = useContext(AuthContext);
+  const { setDates, data, objDate, handleBookVehicle } = useContext(AuthContext);
   const [startDate, setStartDate] = useState<string>('');
   const [endDate, setEndDate] = useState<string>('');
 
@@ -20,17 +19,16 @@ const BookingDates: React.FC = () => {
     if (startDate && endDate) {
       const parsedStartDate = new Date(startDate);
       const parsedEndDate = new Date(endDate);
-  
-  objDate(parsedStartDate,parsedEndDate)
+
+      objDate(parsedStartDate, parsedEndDate);
     }
-    console.log(data)
-    // setDates(false);
+    console.log(data);
+    setDates(false);
+    handleBookVehicle(true);
   };
 
   const isFormValid = startDate !== '' && endDate !== '';
-
   const isEndDateValid = startDate && endDate && new Date(endDate) > new Date(startDate);
-
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -41,7 +39,7 @@ const BookingDates: React.FC = () => {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            backgroundColor: '#f5f5f5',
+            backgroundColor: 'lightgray',
             padding: 3,
             borderRadius: 8,
           }}
@@ -56,6 +54,9 @@ const BookingDates: React.FC = () => {
               type="date"
               InputLabelProps={{
                 shrink: true,
+              }}
+              InputProps={{
+                sx: { backgroundColor: 'white' }, 
               }}
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
@@ -75,6 +76,9 @@ const BookingDates: React.FC = () => {
               type="date"
               InputLabelProps={{
                 shrink: true,
+              }}
+              InputProps={{
+                sx: { backgroundColor: 'white' }, 
               }}
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}

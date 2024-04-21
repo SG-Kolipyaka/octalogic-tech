@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import FormControl from '@mui/material/FormControl';
@@ -11,25 +10,20 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useContext,useState } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../Context/AuthContextProvider';
-
 
 const defaultTheme = createTheme();
 
 const NumberWheels: React.FC = () => {
-  const {
-    setWheels,
-    setVehicles,
-    objWheel
-  } = useContext(AuthContext);
-  const [selectedValue, setSelectedValue] = useState<string>(''); 
+  const { setWheels, setVehicles, objWheel } = useContext(AuthContext);
+  const [selectedValue, setSelectedValue] = useState<string>('');
 
   const handleNext = () => {
     const wheels = selectedValue === 'two' ? 2 : 4;
-    objWheel(wheels)
-    setWheels(false)
-    setVehicles(true)
+    objWheel(wheels);
+    setWheels(false);
+    setVehicles(true);
   };
 
   const isFormValid = selectedValue !== '';
@@ -44,15 +38,20 @@ const NumberWheels: React.FC = () => {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            backgroundColor: '#f5f5f5', 
-            padding: 3, 
-            borderRadius: 8, 
+            backgroundColor: 'lightgray',
+            padding: 3,
+            borderRadius: 8,
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-          </Avatar>
+          <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
+            <img
+              src="https://media.istockphoto.com/id/1415579368/photo/set-of-new-car-wheels-3d-render.webp?b=1&s=170667a&w=0&k=20&c=ebzKQghkWDcukbrg222blgsfMBHse8ou_JeXh0GRXos="
+              alt="Car Wheels"
+              style={{ width: 80, height: 80, borderRadius: '50%' }}
+            />
+          </Box>
           <Typography component="h1" variant="h5">
-            Number of Wheels 
+            Select Number of Wheels
           </Typography>
           <FormControl component="fieldset" sx={{ mt: 3 }}>
             <FormLabel component="legend">Select Number of Wheels</FormLabel>

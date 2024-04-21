@@ -1,5 +1,5 @@
 import { createContext, useState ,useEffect} from "react"
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { userpost,vehcilepatch } from "../Redux/VehicleReducer/action";
 const obj={
     firstName:"",
@@ -16,7 +16,6 @@ export const AuthContext = createContext()
 
 const AuthContextProvider = ({ children }) => {
   const dispatch=useDispatch()
-  const {success}=useSelector((store)=>store.vehiclereducer)
     const [data,setData]=useState(obj)
     const [name, setName] = useState(true)
     const [wheel, setWheel] = useState(false)
@@ -24,6 +23,7 @@ const AuthContextProvider = ({ children }) => {
     const [model, setModel] = useState(false)
     const [date, setDate] = useState(false)
     const [id,setId]=useState(0)
+    const [vehicleBooked, setVehicleBooked] = useState(false);
 
     const objName=(firstName,lastName)=>{
         setData(prevData => ({
@@ -32,6 +32,8 @@ const AuthContextProvider = ({ children }) => {
             lastName: lastName
           }));
     }
+
+
 
     const objWheel=(wheel)=>{
         setData(prevData => ({
@@ -84,9 +86,11 @@ const AuthContextProvider = ({ children }) => {
         setVehicle(data)
     }
 
+    const handleBookVehicle = (data) => {
+        setVehicleBooked(data);
+      };
+
     
-
-
     useEffect(()=>{
         const allFieldsFilled = Object.values(data).every((value) => !!value);
         if (allFieldsFilled) {
@@ -97,10 +101,10 @@ const AuthContextProvider = ({ children }) => {
     },[data])
 
     return (
-        <AuthContext.Provider value={{data,objName,objWheel,objModel,objDate,objVehical, name, wheel, vehicle, model, date, setNames, setVehicles, setModels, setDates, setWheels }}>
+        <AuthContext.Provider value={{vehicleBooked,handleBookVehicle,data,objName,objWheel,objModel,objDate,objVehical, name, wheel, vehicle, model, date, setNames, setVehicles, setModels, setDates, setWheels }}>
             {children}
         </AuthContext.Provider>
     )
 }
 
-export default AuthContextProvider;
+export default AuthContextProvider; 

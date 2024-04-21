@@ -60,7 +60,7 @@ const {vehicles}=useSelector((store)=>store.vehiclereducer)
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            backgroundColor: '#f5f5f5', 
+            backgroundColor: 'lightgray', 
             padding: 3, 
             borderRadius: 8, 
           }}
