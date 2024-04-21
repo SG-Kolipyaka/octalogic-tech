@@ -10,14 +10,17 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect, useMemo } from 'react';
 import { AuthContext } from '../Context/AuthContextProvider';
+import { useDispatch } from 'react-redux';
+import { getvehicleData } from '../Redux/VehicleReducer/action';
 
 const defaultTheme = createTheme();
 
-const NumberWheels: React.FC = () => {
+const NumberWheels = () => {
   const { setWheels, setVehicles, objWheel } = useContext(AuthContext);
-  const [selectedValue, setSelectedValue] = useState<string>('');
+  const [selectedValue, setSelectedValue] = useState('');
+  const dispatch = useDispatch();
 
   const handleNext = () => {
     const wheels = selectedValue === 'two' ? 2 : 4;
@@ -27,6 +30,18 @@ const NumberWheels: React.FC = () => {
   };
 
   const isFormValid = selectedValue !== '';
+
+  const obj = useMemo(() => {
+    return {
+      params: {
+        wheels: selectedValue === 'two' ? 2 : 4
+      }
+    };
+  }, [selectedValue]);
+
+  useEffect(() => {
+    dispatch(getvehicleData(obj));
+  }, [dispatch, obj]);
 
   return (
     <ThemeProvider theme={defaultTheme}>

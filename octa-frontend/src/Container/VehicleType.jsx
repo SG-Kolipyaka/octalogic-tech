@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,44 +10,39 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useContext } from 'react';
+import { useContext, useEffect, useState, useMemo } from 'react';
 import { AuthContext } from '../Context/AuthContextProvider';
-import { useEffect,useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getvehicleData } from '../Redux/VehicleReducer/action';
 
-
 const defaultTheme = createTheme();
 
-
 const VehicleType = () => {
-  const dispatch=useDispatch()
-const {vehicles}=useSelector((store)=>store.vehiclereducer)
-  const {
-    setModels,
-    setVehicles,
-    objVehical,
-    data
-  } = useContext(AuthContext);
+  const dispatch = useDispatch();
+  const { vehicles } = useSelector((store) => store.vehiclereducer);
+  const { setModels, setVehicles, objVehical, data } = useContext(AuthContext);
   const [selectedValue, setSelectedValue] = useState('');
 
-
   const handleNext = () => {
-    objVehical(selectedValue)
-    setVehicles(false)
-    setModels(true)
+    objVehical(selectedValue);
+    setVehicles(false);
+    setModels(true);
   };
 
-  let obj={
-    params:{
-      wheels:data.wheels
-    }
-  }
   const isFormValid = selectedValue !== '';
 
-  useEffect(()=>{
-    dispatch(getvehicleData(obj))
-  },[data])
+  const obj = useMemo(
+    () => ({
+      params: {
+        wheels: data.wheels,
+      },
+    }),
+    [data.wheels]
+  );
+
+  useEffect(() => {
+    dispatch(getvehicleData(obj));
+  }, [dispatch, obj]);
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -60,13 +54,12 @@ const {vehicles}=useSelector((store)=>store.vehiclereducer)
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            backgroundColor: 'lightgray', 
-            padding: 3, 
-            borderRadius: 8, 
+            backgroundColor: 'lightgray',
+            padding: 3,
+            borderRadius: 8,
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-          </Avatar>
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }} />
           <Typography component="h1" variant="h5">
             Type of Vehicle
           </Typography>
@@ -79,12 +72,7 @@ const {vehicles}=useSelector((store)=>store.vehiclereducer)
               onChange={(e) => setSelectedValue(e.target.value)}
             >
               {vehicles.map((option, index) => (
-                <FormControlLabel
-                  key={index} 
-                  value={option}
-                  control={<Radio />}
-                  label={option}
-                />
+                <FormControlLabel key={index} value={option} control={<Radio />} label={option} />
               ))}
             </RadioGroup>
           </FormControl>
@@ -101,7 +89,7 @@ const {vehicles}=useSelector((store)=>store.vehiclereducer)
           </Button>
         </Box>
       </Container>
-    </ThemeProvider>   
+    </ThemeProvider>
   );
 };
 

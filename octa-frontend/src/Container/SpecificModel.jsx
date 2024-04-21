@@ -11,49 +11,46 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useContext,useState,useEffect } from 'react';
+import { useContext, useState, useEffect, useMemo } from 'react';
 import { AuthContext } from '../Context/AuthContextProvider';
 import { useDispatch, useSelector } from 'react-redux';
 import { getvehicleData } from '../Redux/VehicleReducer/action';
 
-
 const defaultTheme = createTheme();
 
 const SpecificModel = () => {
-  const dispatch=useDispatch()
-  const {vehicledata}=useSelector((store)=>store.vehiclereducer)
-  const {
-    setModels,
-    setDates,
-    objModel,
-    data
-  } = useContext(AuthContext);
+  const dispatch = useDispatch();
+  const { vehicledata } = useSelector((store) => store.vehiclereducer);
+  const { setModels, setDates, objModel, data } = useContext(AuthContext);
   const [selectedValue, setSelectedValue] = useState('');
 
-
-
+  const filteredVehicleData = useMemo(
+    () => vehicledata.filter((el) => el.status !== 'booked'),
+    [vehicledata]
+  );
 
   const handleNext = () => {
-    const selectedModel = vehicledata.find((el) => el.model === selectedValue);
+    const selectedModel = filteredVehicleData.find((el) => el.model === selectedValue);
     if (selectedModel) {
-      const { id, model } = selectedModel; 
-      objModel( model,id ); 
+      const { id, model } = selectedModel;
+      objModel(model, id);
       setModels(false);
       setDates(true);
     }
   };
-  let obj={
-    params:{
-      wheels:data.wheels,
-      type:data.vehicleType
+
+  let obj = {
+    params: {
+      wheels: data.wheels,
+      type: data.vehicleType
     }
-  }
+  };
 
   const isFormValid = selectedValue !== '';
 
-  useEffect(()=>{
-    dispatch(getvehicleData(obj))
-  },[data,selectedValue])
+  useEffect(() => {
+    dispatch(getvehicleData(obj));
+  }, [data]);
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -65,13 +62,12 @@ const SpecificModel = () => {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            backgroundColor: 'lightgray', 
+            backgroundColor: 'lightgray',
             padding: 3,
-            borderRadius: 8, 
+            borderRadius: 8
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-          </Avatar>
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }} />
           <Typography component="h1" variant="h5">
             Select the Model
           </Typography>
@@ -83,11 +79,9 @@ const SpecificModel = () => {
               value={selectedValue}
               onChange={(e) => setSelectedValue(e.target.value)}
             >
-              {vehicledata.map((el)=>{
-                if(el.status!=="booked"){
-                  return <FormControlLabel key={el.id} value={el.model} control={<Radio />} label={el.model}/>
-                }
-              })}
+              {filteredVehicleData.map((el) => (
+                <FormControlLabel key={el.id} value={el.model} control={<Radio />} label={el.model} />
+              ))}
             </RadioGroup>
           </FormControl>
           <Button
