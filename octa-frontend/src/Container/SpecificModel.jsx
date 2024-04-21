@@ -21,13 +21,17 @@ const defaultTheme = createTheme();
 const SpecificModel = () => {
   const dispatch = useDispatch();
   const { vehicledata } = useSelector((store) => store.vehiclereducer);
-  const { setModels, setDates, objModel, data } = useContext(AuthContext);
+  const {
+    setModels,
+    setDates,
+    objModel,
+    data
+  } = useContext(AuthContext);
   const [selectedValue, setSelectedValue] = useState('');
 
-  const filteredVehicleData = useMemo(
-    () => vehicledata.filter((el) => el.status !== 'booked'),
-    [vehicledata]
-  );
+  const filteredVehicleData = useMemo(() => {
+    return vehicledata.filter((el) => el.status !== 'booked');
+  }, [vehicledata]);
 
   const handleNext = () => {
     const selectedModel = filteredVehicleData.find((el) => el.model === selectedValue);
@@ -50,7 +54,7 @@ const SpecificModel = () => {
 
   useEffect(() => {
     dispatch(getvehicleData(obj));
-  }, [data]);
+  }, [data, dispatch]);
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -64,7 +68,7 @@ const SpecificModel = () => {
             alignItems: 'center',
             backgroundColor: 'lightgray',
             padding: 3,
-            borderRadius: 8
+            borderRadius: 8,
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }} />
@@ -80,7 +84,12 @@ const SpecificModel = () => {
               onChange={(e) => setSelectedValue(e.target.value)}
             >
               {filteredVehicleData.map((el) => (
-                <FormControlLabel key={el.id} value={el.model} control={<Radio />} label={el.model} />
+                <FormControlLabel
+                  key={el.id}
+                  value={el.model}
+                  control={<Radio />}
+                  label={el.model}
+                />
               ))}
             </RadioGroup>
           </FormControl>
