@@ -16,43 +16,81 @@ my-app/
 ├─ backend/
 
 │ ├── Controllers/
+
 │ │ ├── userBookingRoutes.js: Controller for handling user booking routes and logic.
+
 │ │ └── vehiclesRoutes.js: Controller for handling vehicle-related routes and logic.
+
 │ ├── Migrations/ Database migration scripts.
+
 │ ├── Models/
+
 │ │ ├── UserBooking.js: Model definition for user bookings.
+
 │ │ └── Vehicle.js: Model definition for vehicle data.
+
 │ ├── index.js: Entry point for the backend application.
+
 │ ├── node_modules/ Directory containing Node.js modules (dependencies).
+
 │ ├── seeders/ Database seeding scripts.
+
 │ ├── .gitignore: Configuration file to specify files/folders that Git should ignore.
+
 │ ├── package-lock.json: Automatically generated file describing the exact tree of npm packages that were installed.
+
 │ └── package.json: File containing metadata and dependencies for the Node.js project.
+
 ├─ frontend/
+
 │ ├── public/ Static assets and HTML file used as the template for the React application.
+
 │ └── src/
+
 │ ├── Container/
+
 │ │ ├── BookingDates.tsx: Component for handling booking date selection.
+
 │ │ ├── BookingSuccessMessage.jsx: Component for displaying a success message after booking.
+
 │ │ ├── NameForm.tsx: Component for capturing user name information.
+
 │ │ ├── NumberWheels.jsx: Component for selecting the number of wheels.
+
 │ │ ├── SpecificModel.jsx: Component for selecting a specific vehicle model.
+
 │ │ └── VehicleType.jsx: Component for selecting the type of vehicle.
+
 │ ├── Context/ Directory for managing React context providers and consumers.
+
 │ ├── Redux/ Directory for Redux-related files such as reducers, actions, and store setup.
+
 │ ├── ReusableComponents/ Directory containing reusable UI components.
+
 │ ├── App.css: CSS file for styling the main application components.
+
 │ ├── App.test.tsx: Test file for testing React components.
+
 │ ├── App.tsx: Main component where other components are rendered.
+
 │ ├── index.css: CSS file for global styles.
+
 │ ├── index.tsx: Entry point for the React application.
+
 │ ├── logo.svg: SVG file used as the logo for the application.
+
 │ ├── react-app-env.d.ts: TypeScript declaration file for global types.
+
 │ ├── reportWebVitals.ts: File for reporting web vitals.
+
 │ ├── setupTests.ts: File for setting up tests.
+
 │ ├── .gitignore: Configuration file to specify files/folders that Git should ignore.
+
 │ ├── README.md: Documentation file providing information about the frontend application.
+
 │ ├── package-lock.json: Automatically generated file describing the exact tree of npm packages that were installed.
+
 │ └── package.json: File containing metadata and dependencies for the React project.
 
 
