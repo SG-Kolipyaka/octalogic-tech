@@ -29,6 +29,7 @@ const BookingDates: React.FC = () => {
 
   const isFormValid = startDate !== '' && endDate !== '';
   const isEndDateValid = startDate && endDate && new Date(endDate) > new Date(startDate);
+  const isStartDateValid = startDate && new Date(startDate) >= new Date();
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -68,6 +69,11 @@ const BookingDates: React.FC = () => {
                 * Start Date is required
               </Typography>
             )}
+            {startDate && !isStartDateValid && (
+              <Typography color="error" variant="caption" sx={{ mt: 1 }}>
+                * Start Date must be today or in the future
+              </Typography>
+            )}
           </Box>
           <Box sx={{ mt: 3 }}>
             <TextField
@@ -101,7 +107,7 @@ const BookingDates: React.FC = () => {
             fullWidth
             variant="contained"
             color="primary"
-            disabled={!isFormValid || !isEndDateValid}
+            disabled={!isFormValid || !isEndDateValid || !isStartDateValid}
             onClick={handleFormSubmit}
             sx={{ mt: 3 }}
           >

@@ -12,6 +12,7 @@ const obj={
     bookingID:0
   }
 
+ 
 export const AuthContext = createContext()
 
 const AuthContextProvider = ({ children }) => {
@@ -65,6 +66,9 @@ const AuthContextProvider = ({ children }) => {
           }));
     }
     
+    const setDatas=(data)=>{
+        setData(obj); 
+    }
  
     const setNames = (data) => {
         setName(data)
@@ -96,12 +100,11 @@ const AuthContextProvider = ({ children }) => {
         if (allFieldsFilled) {
             dispatch(userpost(data))
             dispatch(vehcilepatch({status:"booked"},id))
-            setData(obj); 
         }
     },[data])
 
     return (
-        <AuthContext.Provider value={{vehicleBooked,handleBookVehicle,data,objName,objWheel,objModel,objDate,objVehical, name, wheel, vehicle, model, date, setNames, setVehicles, setModels, setDates, setWheels }}>
+        <AuthContext.Provider value={{vehicleBooked,setDatas,handleBookVehicle,data,objName,objWheel,objModel,objDate,objVehical, name, wheel, vehicle, model, date, setNames, setVehicles, setModels, setDates, setWheels }}>
             {children}
         </AuthContext.Provider>
     )
