@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
@@ -11,6 +10,7 @@ import FormLabel from '@mui/material/FormLabel';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../Context/AuthContextProvider';
+import ReusableButton from '../ReusableComponents/ReusableButton';
 
 const defaultTheme = createTheme();
 
@@ -87,17 +87,7 @@ const NameForm: React.FC = () => {
                 />
               </Grid>
             </Grid>
-            <Button
-              type="button"
-              fullWidth
-              variant="contained"
-              color="primary"
-              disabled={!isFormValid}
-              onClick={handleNext}
-              sx={{ mt: 3 }}
-            >
-              Next
-            </Button>
+            <ReusableButton disabled={!isFormValid?true:false} onClick={handleNext} label={"Next"}/>
           </Box>
         </Box>
       </Container>

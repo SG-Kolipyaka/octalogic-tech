@@ -1,5 +1,4 @@
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -14,6 +13,7 @@ import { useContext, useEffect, useState, useMemo } from 'react';
 import { AuthContext } from '../Context/AuthContextProvider';
 import { useDispatch, useSelector } from 'react-redux';
 import { getvehicleData } from '../Redux/VehicleReducer/action';
+import ReusableButton from '../ReusableComponents/ReusableButton';
 
 const defaultTheme = createTheme();
 
@@ -76,17 +76,7 @@ const VehicleType = () => {
               ))}
             </RadioGroup>
           </FormControl>
-          <Button
-            type="button"
-            fullWidth
-            variant="contained"
-            color="primary"
-            disabled={!isFormValid}
-            onClick={handleNext}
-            sx={{ mt: 3 }}
-          >
-            Next
-          </Button>
+          <ReusableButton disabled={!isFormValid?true:false} onClick={handleNext} label={"Next"}/>
         </Box>
       </Container>
     </ThemeProvider>
