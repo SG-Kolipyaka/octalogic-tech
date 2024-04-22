@@ -6,7 +6,7 @@ export const getvehicleData = (vehicleData) => (dispatch) => {
   dispatch({ type: VEHICLE_REQUEST });
 
   axios
-    .get('http://localhost:8082/api/getvehicle', vehicleData)
+    .get('https://octalogic-backend-1.onrender.com/api/getvehicle', vehicleData)
     .then((res) => {
       const filteredData = res.data.data.filter((item) => item.status === "available");
 
@@ -26,7 +26,7 @@ export const getvehicleData = (vehicleData) => (dispatch) => {
 
 export const userpost=(userData)=>(dispatch)=>{
   dispatch({type:VEHICLE_REQUEST})
-axios.post("http://localhost:8082/api/userbookings",userData).then(()=>{
+axios.post("https://octalogic-backend-1.onrender.com/api/userbookings",userData).then(()=>{
   dispatch({type:VEHICLE_POST_SUCCESS})
 }).catch(()=>{
   dispatch({type:VEHICLE_FAILURE})
@@ -36,7 +36,7 @@ axios.post("http://localhost:8082/api/userbookings",userData).then(()=>{
 
 export const vehcilepatch=(userData1,id)=>(dispatch)=>{
   dispatch({type:VEHICLE_REQUEST})
- return axios.patch(`http://localhost:8082/api/update/${id}`,userData1).then(()=>{
+ return axios.patch(`https://octalogic-backend-1.onrender.com/api/update/${id}`,userData1).then(()=>{
 dispatch({type:VEHICLE_PATCH_SUCCESS})
   }).catch(()=>{
     dispatch({type:VEHICLE_FAILURE})
