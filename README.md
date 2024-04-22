@@ -13,9 +13,13 @@ Backend: https://octalogic-backend-1.onrender.com/
 ## Directory Structure
 Backend (octa-backend)
 ├── Controllers
+
 │   ├── userBookingRoutes.js:        Controller for handling user booking routes and logic.
+
 │   └── vehiclesRoutes.js:           Controller for handling vehicle-related routes and logic.
+
 ├── Migrations:                       Database migration scripts.
+
 ├── Models
 │   ├── UserBooking.js:               Model definition for user bookings.
 │   └── Vehicle.js:                   Model definition for vehicle data.
