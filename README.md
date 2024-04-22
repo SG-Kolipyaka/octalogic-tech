@@ -7,7 +7,7 @@ This project aims to provide users with a streamlined form interface to collect 
 Frontend | Backend | Fullstack
 
 ## Deplolyed App
-Frontend: https://octalogic-o372h16p8-sgkolipyakas-projects.vercel.app/
+Frontend: https://octalogic-ii1k62xhm-sgkolipyakas-projects.vercel.app/
 Backend: https://octalogic-backend-1.onrender.com/
 
 ## Directory Structure
