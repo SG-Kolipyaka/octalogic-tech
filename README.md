@@ -11,6 +11,54 @@ Frontend: https://octalogic-o372h16p8-sgkolipyakas-projects.vercel.app/
 Backend: https://octalogic-backend-1.onrender.com/
 
 ## Directory Structure
+├── octa-backend
+│   ├── Controllers
+│   │   ├── userBookingRoutes.js
+│   │   └── vehicalsRoutes.js
+│   ├── migrations
+│   ├── models
+│   │   ├── UserBooking.js
+│   │   └── Vehicle.js
+│   ├── index.js
+│   ├── node_modules
+│   ├── seeders
+│   │   └── index.js
+│   ├── .gitignore
+│   ├── package-lock.json
+│   └── package.json
+│
+└── octa-frontend
+    ├── public
+    │   ├── index.html
+    │   └── ...
+    ├── src
+    │   ├── Container
+    │   │   ├── BookingDates.tsx
+    │   │   ├── BookingSuccessMessage.jsx
+    │   │   ├── NameForm.tsx
+    │   │   ├── NumberWeels.jsx
+    │   │   ├── SpecificModel.jsx
+    │   │   └── VehicleType.jsx
+    │   ├── Context
+    │   │   └── ...
+    │   ├── Redux
+    │   │   └── ...
+    │   ├── ReusableComponents
+    │   │   └── ...
+    │   ├── App.css
+    │   ├── App.test.tsx
+    │   ├── App.tsx
+    │   ├── index.css
+    │   ├── index.tsx
+    │   ├── logo.svg
+    │   ├── react-app-env.d.ts
+    │   ├── reportWebVitals.ts
+    │   ├── setupTests.ts
+    │   └── ...
+    ├── .gitignore
+    ├── README.md
+    ├── package-lock.json
+    └── package.json
 
 
 
