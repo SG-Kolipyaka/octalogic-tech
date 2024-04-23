@@ -125,8 +125,9 @@ PATCH /api/update/:id - To edit the vehicals info
    ![Screenshot (82)](https://github.com/SG-Kolipyaka/octalogic-tech/assets/113519884/a18df4b7-08a9-4d92-95f5-f79d3dd4175d)
 6. Date valadation
    ![Screenshot (83)](https://github.com/SG-Kolipyaka/octalogic-tech/assets/113519884/47466638-adc3-49c1-8376-e534dfc19829)
-9. dooked Success page
-    ![Screenshot (84)](https://github.com/SG-Kolipyaka/octalogic-tech/assets/113519884/276e25f2-7753-4c0a-ab2a-0c9f2e693651)
+9. booked Success page
+    ![Screenshot (85)](https://github.com/SG-Kolipyaka/octalogic-tech/assets/113519884/adaf4e3d-a87e-4440-99ae-08c3b3928ae6)
+
 
 
 
